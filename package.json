@@ -1,0 +1,34 @@
+{
+  "name": "multi-tenant-ecommerce",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "services/api"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,store,admin \"npm run dev -w @ecom/api\" \"npm run dev -w @ecom/storefront\" \"npm run dev -w @ecom/admin-dashboard\"",
+    "build": "npm run build -w @ecom/utils && npm run build -w @ecom/api-client && npm run build -w @ecom/ui && npm run build -w @ecom/api && npm run build -w @ecom/storefront && npm run build -w @ecom/admin-dashboard",
+    "test": "npm run test -w @ecom/api && npm run test -w @ecom/utils",
+    "test:e2e": "npm run test:e2e -w @ecom/storefront",
+    "lint": "eslint apps packages services --max-warnings 0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.2",
+    "@typescript-eslint/eslint-plugin": "^8.18.2",
+    "@typescript-eslint/parser": "^8.18.2",
+    "concurrently": "^9.1.0",
+    "eslint": "^9.17.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
